@@ -1,32 +1,31 @@
-
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-//printing elements of array
-void print(int arr[], int n){
-    for(int i = 0; i < n; i++){
-        cout << arr[i] << " ";
-    }
+
+void reverseArray(int arr[], int start, int end) {
+    // Base case: when start >= end
+    if(start >= end) return;
+
+    // Swap elements
+    swap(arr[start], arr[end]);
+
+    // Recursive call
+    reverseArray(arr, start + 1, end - 1);
 }
 
-// reversing an array using recursion
+void f(int arr[], int i, int n){
+    if( i > n/2) return;
 
-int main()
-{
-    //cout<<"Hello World";
-    int n = 10;
-    int arr[n] = {1,3,5,7,9,11,13,15,17,19};
-    int *left = arr;
-    int *right = &arr[n-1];
-    
-    for(int i = 0; i<n/2; i++){
-        int temp = *left;
-        *left = *right;
-        *right = temp;
+    swap(arr[i], arr[n-i-1]);
+    f(arr, i+1, n);
+}
 
-        left++;
-        right--;
-    }
-    print(arr, n);
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int n = sizeof(arr)/sizeof(arr[0]);
 
+    //reverseArray(arr, 0, n-1);
+    f(arr, 0, n);
+    // Print reversed array
+    for(int i=0; i<n; i++) cout << arr[i] << " ";
     return 0;
 }
